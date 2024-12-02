@@ -12,3 +12,5 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient()]
 };
+
+export const carServiceApiUrl = "http://34.136.40.129:80";
