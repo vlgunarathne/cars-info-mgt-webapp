@@ -1,29 +1,11 @@
-# Use the official Node.js image as the base image
-FROM node:18 as build
+FROM node:alpine
 
-# Set the working directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
-# Copy the package.json and package-lock.json files
-COPY package*.json ./
+COPY . /usr/src/app
 
-# Install the dependencies
+RUN npm install -g @angular/cli
+
 RUN npm install
 
-# Copy the rest of the application code
-COPY . .
-
-# Build the Angular application
-RUN npm run build --prod
-
-# Use the official NGINX image as the base image for serving the application
-FROM nginx:alpine
-
-# Copy the built Angular application from the build stage to the NGINX html directory
-COPY --from=build /app/dist/cars-info-mgt-webapp /usr/share/nginx/html
-
-# Expose port 80
-EXPOSE 80
-
-# Start NGINX
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["ng", "serve", "--host", "0.0.0.0"]
