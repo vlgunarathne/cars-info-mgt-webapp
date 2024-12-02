@@ -1,0 +1,62 @@
+.container {
+    padding: 16px;
+}
+
+.car-card {
+    width: 90%;
+    height: 90%;
+    margin: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.car-card:hover {
+    transform: scale(1.02);
+}
+
+mat-card-content {
+    margin-top: 16px;
+}
+
+mat-card-title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+mat-card-subtitle {
+    font-size: 1.1em;
+}
+
+.search-button {
+    height: 56px;
+    min-width: 120px;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.search-button .mat-icon {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.filter-history {
+    margin: 16px 0 24px 0;
+    padding: 16px;
+    background: #f5f5f5;
+    border-radius: 8px;
+  }
+  
+  .filter-history h3 {
+    margin: 0 0 16px 0;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  
+  .filter-chip {
+    margin: 4px;
+  }
+  
+  mat-chip-listbox {
+    display: flex;
+    flex-wrap: wrap;
+  }

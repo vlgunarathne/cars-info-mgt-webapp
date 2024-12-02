@@ -1,0 +1,16 @@
+<mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label>MPG</mat-label>
+      <input matInput [(ngModel)]="car.mpg" type="number" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Horsepower</mat-label>
+      <input matInput [(ngModel)]="car.horsepower" type="number" />
+    </mat-form-field>
+    <!-- Add more fields as necessary -->
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="saveCar()">Save</button>
+    <button mat-button color="warn" (click)="deleteCar()">Delete</button>
+  </mat-dialog-actions>
+  
