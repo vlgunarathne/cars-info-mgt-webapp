@@ -1,6 +1,6 @@
-<div>
+<div class="page-container">
   <!-- Filter History Section -->
-  <div class="filter-history" *ngIf="savedFilters.length > 0">
+  <!-- <div class="filter-history" *ngIf="savedFilters.length > 0">
     <h3>Previous Filters</h3>
     <mat-chip-listbox>
       <mat-chip-option *ngFor="let filter of savedFilters" (click)="applyHistoricalFilter(filter)"
@@ -8,41 +8,67 @@
         {{ getFilterDisplayText(filter) }}
       </mat-chip-option>
     </mat-chip-listbox>
+  </div> -->
+
+  <!-- Left Column -->
+  <div class="main-content">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="filters.name" type="text" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Min MPG</mat-label>
+      <input matInput [(ngModel)]="filters.mpg_min" type="number" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Max MPG</mat-label>
+      <input matInput [(ngModel)]="filters.mpg_max" type="number" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" class="search-button" (click)="loadCars()">
+      <mat-icon>search</mat-icon>
+      Search Cars
+    </button>
+    <!-- Add similar fields for other filters -->
+
+    <div class="car-grid">
+      <mat-grid-list cols="4" rowHeight="1:1" gutterSize="2">
+        <mat-grid-tile *ngFor="let car of cars">
+          <mat-card class="car-card" (click)="openCarDialog(car)">
+            <mat-card-header>
+              <mat-card-title>{{ car.name }}</mat-card-title>
+              <mat-card-subtitle>Year : {{ car.model_year }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>MPG: {{ car.mpg }}</p>
+              <p>Horsepower: {{ car.horsepower }}</p>
+              <p>Origin: {{ car.origin }}</p>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
   </div>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="filters.name" type="text" />
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Min MPG</mat-label>
-    <input matInput [(ngModel)]="filters.mpg_min" type="number" />
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Max MPG</mat-label>
-    <input matInput [(ngModel)]="filters.mpg_max" type="number" />
-  </mat-form-field>
-  <button mat-raised-button color="primary" type="submit" class="search-button" (click)="loadCars()">
-    <mat-icon>search</mat-icon>
-    Search Cars
-  </button>
-  <!-- Add similar fields for other filters -->
-
-  <div class="car-grid">
-    <mat-grid-list cols="5" rowHeight="1:1" gutterSize="10">
-      <mat-grid-tile *ngFor="let car of cars">
-        <mat-card class="car-card" (click)="openCarDialog(car)">
-          <mat-card-header>
-            <mat-card-title>{{ car.model_year }}</mat-card-title>
-            <mat-card-subtitle>{{ car.name }}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>MPG: {{ car.mpg }}</p>
-            <p>Horsepower: {{ car.horsepower }}</p>
-            <p>Origin: {{ car.origin }}</p>
-          </mat-card-content>
-        </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list>
+  <!-- Right Column -->
+  <!-- Filter History Section -->
+  <div class="filters-sidebar">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Previous Filters</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-chip-listbox>
+          <mat-chip-option *ngFor="let filter of savedFilters; let i = index" (click)="applyHistoricalFilter(filter)"
+            [matTooltip]="getFilterDisplayText(filter)" matTooltipPosition="above" class="filter-chip">
+            Date : {{filter.createdAt}}
+            {{ getFilterDisplayText(filter) }}
+            <button matChipRemove (click)="deleteFilter($event, filter, i)" [matTooltip]="'Delete filter'"
+              class="delete-button">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-option>
+        </mat-chip-listbox>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>

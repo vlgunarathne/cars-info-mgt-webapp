@@ -14,6 +14,7 @@ import { Filter } from '../../models/filter.model';
 import { FilterService } from '../../services/filter.service';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -28,7 +29,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatGridListModule,
     MatIconModule,
     MatChipsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSnackBarModule
   ],
 })
 export class HomeComponent implements OnInit {
@@ -36,6 +38,7 @@ export class HomeComponent implements OnInit {
   savedFilters: Filter[] = [];
 
   public filters: Filter = {
+    id: null,
     name: null,
     mpg_min: null,
     mpg_max: null,
@@ -53,7 +56,12 @@ export class HomeComponent implements OnInit {
     // Add other filters here
   };
 
-  constructor(private carService: CarService, private filterService: FilterService, private dialog: MatDialog) { }
+  constructor(
+    private carService: CarService,
+    private filterService: FilterService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     this.loadCars();
@@ -72,6 +80,7 @@ export class HomeComponent implements OnInit {
   applyHistoricalFilter(filter: Filter) {
     // Convert the historical filter format to current format
     this.filters = {
+      id: filter.id,
       name: filter.name,
       mpg_min: filter.mpg_min,
       mpg_max: filter.mpg_max,
@@ -86,9 +95,28 @@ export class HomeComponent implements OnInit {
       acceleration_max: filter.acceleration_max,
       model_year: filter.model_year,
       origin: filter.origin
-
     };
     this.loadCars();
+  }
+
+  deleteFilter(event: Event, filter: Filter, index: number) {
+    // Stop the chip click event from triggering
+    event.stopPropagation();
+
+    this.filterService.deleteFilter(filter.id).subscribe({
+      next: () => {
+        this.savedFilters.splice(index, 1);
+        this.snackBar.open('Filter deleted successfully', 'Close', {
+          duration: 3000
+        });
+      },
+      error: (error) => {
+        console.error('Error deleting filter:', error);
+        this.snackBar.open('Error deleting filter', 'Close', {
+          duration: 3000
+        });
+      }
+    });
   }
 
   getFilterDisplayText(filter: Filter): string {
@@ -120,10 +148,6 @@ export class HomeComponent implements OnInit {
     if (filter.origin) {
       parts.push(`Origin: ${filter.origin}`);
     }
-    if (filter.createdAt) {
-      parts.push(`Created date: ${filter.createdAt}`);
-    }
-
 
     return parts.join(', ');
   }

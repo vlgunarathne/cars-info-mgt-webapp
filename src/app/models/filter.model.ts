@@ -1,4 +1,5 @@
 export interface Filter {
+  id: string | null,
   name: string | null,
   mpg_min: number | null,
   mpg_max: number | null,
