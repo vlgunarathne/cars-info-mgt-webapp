@@ -1,6 +1,6 @@
 .page-container {
     display: grid;
-    grid-template-columns: 1fr 300px;
+    grid-template-columns: 1fr 350px;
     gap: 24px;
     padding: 24px;
     height: calc(100vh - 64px);
@@ -10,6 +10,7 @@
 
 .main-content {
     overflow-y: auto;
+    padding: 10px;
 }
 
 .filters-sidebar {
@@ -17,7 +18,7 @@
 }
 
 .filters-sidebar mat-card {
-    position: sticky;
+    /* position: sticky; */
     top: 24px;
     max-height: calc(100vh - 88px);
     overflow-y: auto;
@@ -84,11 +85,12 @@ mat-card-subtitle {
 }
 
 .search-button {
-    height: 56px;
-    min-width: 120px;
-    font-size: 16px;
-    font-weight: 500;
     text-transform: uppercase;
+    margin: 5px;
+}
+
+.search-field {
+    margin: 5px;
 }
 
 .search-button .mat-icon {

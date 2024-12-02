@@ -70,11 +70,32 @@ export class HomeComponent implements OnInit {
 
   loadCars(): void {
     this.carService.getCars(this.filters).subscribe(cars => (this.cars = cars));
-    this.loadFilters();
+    this.savedFilters.unshift(this.filters);
   }
 
   loadFilters(): void {
     this.filterService.getFilters().subscribe(filters => (this.savedFilters = filters));
+  }
+
+  clearFilters(): void {
+    this.filters = {
+      id: null,
+      name: null,
+      mpg_min: null,
+      mpg_max: null,
+      cylinders: null,
+      displacement_min: null,
+      displacement_max: null,
+      horsepower_min: null,
+      horsepower_max: null,
+      weight_min: null,
+      weight_max: null,
+      acceleration_min: null,
+      acceleration_max: null,
+      model_year: null,
+      origin: null
+      // Add other filters here
+    };
   }
 
   applyHistoricalFilter(filter: Filter) {
