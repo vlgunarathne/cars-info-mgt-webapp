@@ -13,4 +13,4 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient()]
 };
 
-export const carServiceApiUrl = "http://34.136.40.129:80";
+export const carServiceApiUrl = "https://cars-info-mgt-service-899174417971.us-central1.run.app";

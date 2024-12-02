@@ -71,15 +71,16 @@
 
 mat-card-content {
     margin-top: 16px;
+    font-size: 1.0em;
 }
 
 mat-card-title {
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: bold;
 }
 
 mat-card-subtitle {
-    font-size: 1.1em;
+    font-size: 1.0em;
 }
 
 .search-button {

@@ -31,7 +31,7 @@
     <!-- Add similar fields for other filters -->
 
     <div class="car-grid">
-      <mat-grid-list cols="4" rowHeight="1:1" gutterSize="2">
+      <mat-grid-list cols="4" rowHeight="1:1" gutterSize="5">
         <mat-grid-tile *ngFor="let car of cars">
           <mat-card class="car-card" (click)="openCarDialog(car)">
             <mat-card-header>
@@ -39,9 +39,43 @@
               <mat-card-subtitle>Year : {{ car.model_year }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-              <p>MPG: {{ car.mpg }}</p>
-              <p>Horsepower: {{ car.horsepower }}</p>
-              <p>Origin: {{ car.origin }}</p>
+              <table>
+                <tr>
+                  <td>MPG</td>
+                  <td>:</td>
+                  <td>{{car.mpg}}</td>
+                </tr>
+                <tr>
+                  <td>Cylinders</td>
+                  <td>:</td>
+                  <td>{{car.cylinders}}</td>
+                </tr>
+                <tr>
+                  <td>Displacement</td>
+                  <td>:</td>
+                  <td>{{car.displacement}}</td>
+                </tr>
+                <tr>
+                  <td>Horsepower</td>
+                  <td>:</td>
+                  <td>{{car.horsepower}}</td>
+                </tr>
+                <tr>
+                  <td>Weight</td>
+                  <td>:</td>
+                  <td>{{car.weight}}</td>
+                </tr>
+                <tr>
+                  <td>Acceleration</td>
+                  <td>:</td>
+                  <td>{{car.acceleration}}</td>
+                </tr>
+                <tr>
+                  <td>Origin</td>
+                  <td>:</td>
+                  <td>{{car.origin}}</td>
+                </tr>
+              </table>
             </mat-card-content>
           </mat-card>
         </mat-grid-tile>

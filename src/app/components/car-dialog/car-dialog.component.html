@@ -1,16 +1,43 @@
 <mat-dialog-content>
-    <mat-form-field appearance="fill">
-      <mat-label>MPG</mat-label>
-      <input matInput [(ngModel)]="car.mpg" type="number" />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Horsepower</mat-label>
-      <input matInput [(ngModel)]="car.horsepower" type="number" />
-    </mat-form-field>
-    <!-- Add more fields as necessary -->
-  </mat-dialog-content>
-  <mat-dialog-actions>
-    <button mat-button (click)="saveCar()">Save</button>
-    <button mat-button color="warn" (click)="deleteCar()">Delete</button>
-  </mat-dialog-actions>
-  
+  <mat-form-field appearance="fill" class="formField">
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="car.name" type="string" />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="formField">
+    <mat-label>MPG</mat-label>
+    <input matInput [(ngModel)]="car.mpg" type="number" />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="formField">
+    <mat-label>Cylinders</mat-label>
+    <input matInput [(ngModel)]="car.cylinders" type="number" />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="formField">
+    <mat-label>Displacement</mat-label>
+    <input matInput [(ngModel)]="car.displacement" type="number" />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="formField">
+    <mat-label>Horsepower</mat-label>
+    <input matInput [(ngModel)]="car.horsepower" type="number" />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="formField">
+    <mat-label>Weight</mat-label>
+    <input matInput [(ngModel)]="car.weight" type="number" />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="formField">
+    <mat-label>Acceleration</mat-label>
+    <input matInput [(ngModel)]="car.acceleration" type="number" />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="formField">
+    <mat-label>Model Year</mat-label>
+    <input matInput [(ngModel)]="car.model_year" type="number" />
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="formField">
+    <mat-label>Origin</mat-label>
+    <input matInput [(ngModel)]="car.origin" type="number" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="saveCar()">Save</button>
+  <button mat-button color="warn" (click)="deleteCar()">Delete</button>
+  <button mat-button (click)="close()">Close</button>
+</mat-dialog-actions>

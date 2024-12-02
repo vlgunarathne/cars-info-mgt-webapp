@@ -28,4 +28,9 @@ export class CarDialogComponent {
   deleteCar(): void {
     this.carService.deleteCar(this.car.id).subscribe(() => this.dialogRef.close(true));
   }
+
+  close(): void {
+    this.dialogRef.close();
+  }
+  
 }

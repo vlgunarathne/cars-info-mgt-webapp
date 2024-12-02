@@ -1,10 +1,10 @@
 {
     "/cars": {
-        "target": "http://localhost:3000",
+        "target": "https://cars-info-mgt-service-899174417971.us-central1.run.app",
         "secure": false
     },
     "/filters": {
-        "target": "http://localhost:3000",
+        "target": "https://cars-info-mgt-service-899174417971.us-central1.run.app",
         "secure": false
     }
 }
