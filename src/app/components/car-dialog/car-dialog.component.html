@@ -1,40 +1,49 @@
+<h2 mat-dialog-title>{{isNewCar ? 'Add New Car' : 'Edit Car'}}</h2>
+
 <mat-dialog-content>
-  <mat-form-field appearance="fill" class="formField">
-    <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="car.name" type="string" />
-  </mat-form-field>
-  <mat-form-field appearance="fill" class="formField">
-    <mat-label>MPG</mat-label>
-    <input matInput [(ngModel)]="car.mpg" type="number" />
-  </mat-form-field>
-  <mat-form-field appearance="fill" class="formField">
-    <mat-label>Cylinders</mat-label>
-    <input matInput [(ngModel)]="car.cylinders" type="number" />
-  </mat-form-field>
-  <mat-form-field appearance="fill" class="formField">
-    <mat-label>Displacement</mat-label>
-    <input matInput [(ngModel)]="car.displacement" type="number" />
-  </mat-form-field>
-  <mat-form-field appearance="fill" class="formField">
-    <mat-label>Horsepower</mat-label>
-    <input matInput [(ngModel)]="car.horsepower" type="number" />
-  </mat-form-field>
-  <mat-form-field appearance="fill" class="formField">
-    <mat-label>Weight</mat-label>
-    <input matInput [(ngModel)]="car.weight" type="number" />
-  </mat-form-field>
-  <mat-form-field appearance="fill" class="formField">
-    <mat-label>Acceleration</mat-label>
-    <input matInput [(ngModel)]="car.acceleration" type="number" />
-  </mat-form-field>
-  <mat-form-field appearance="fill" class="formField">
-    <mat-label>Model Year</mat-label>
-    <input matInput [(ngModel)]="car.model_year" type="number" />
-  </mat-form-field>
-  <mat-form-field appearance="fill" class="formField">
-    <mat-label>Origin</mat-label>
-    <input matInput [(ngModel)]="car.origin" type="string" />
-  </mat-form-field>
+  <div class="dialog-content-container">
+    <!-- Add thumbnail container -->
+    <div class="car-image-container">
+      <img src="/car_thumbnail.jpeg" [alt]="car.name" class="car-thumbnail">
+    </div>
+    <mat-form-field appearance="fill" class="formField">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="car.name" type="string" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="formField">
+      <mat-label>MPG</mat-label>
+      <input matInput [(ngModel)]="car.mpg" type="number" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="formField">
+      <mat-label>Cylinders</mat-label>
+      <input matInput [(ngModel)]="car.cylinders" type="number" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="formField">
+      <mat-label>Displacement</mat-label>
+      <input matInput [(ngModel)]="car.displacement" type="number" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="formField">
+      <mat-label>Horsepower</mat-label>
+      <input matInput [(ngModel)]="car.horsepower" type="number" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="formField">
+      <mat-label>Weight</mat-label>
+      <input matInput [(ngModel)]="car.weight" type="number" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="formField">
+      <mat-label>Acceleration</mat-label>
+      <input matInput [(ngModel)]="car.acceleration" type="number" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="formField">
+      <mat-label>Model Year</mat-label>
+      <input matInput [(ngModel)]="car.model_year" type="number" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="formField">
+      <mat-label>Origin</mat-label>
+      <input matInput [(ngModel)]="car.origin" type="string" />
+    </mat-form-field>
+
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-flat-button color="primary" (click)="saveCar()">{{isNewCar ? 'Create' : 'Save'}}</button>

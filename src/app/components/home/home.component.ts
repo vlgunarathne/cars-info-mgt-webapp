@@ -218,6 +218,8 @@ export class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(CarDialogComponent, {
       width: '600px',
       data: car,
+      disableClose: false,
+      panelClass: 'car-dialog'
     });
 
     dialogRef.afterClosed().subscribe(result => {
