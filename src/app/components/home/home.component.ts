@@ -83,6 +83,7 @@ export class HomeComponent implements OnInit {
         if (this.currentSort) {
           this.applySorting(this.currentSort);
         }
+        this.loadFilters();
       },
       error: (error) => {
         console.error('Error loading cars:', error);
@@ -93,7 +94,6 @@ export class HomeComponent implements OnInit {
         });
       }
     });
-    this.savedFilters.unshift(this.filters);
   }
 
   sortCars(direction: 'asc' | 'desc' | null) {

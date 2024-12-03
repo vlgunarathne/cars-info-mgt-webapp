@@ -1,39 +1,114 @@
+<div>
+  <button mat-flat-button color="primary" (click)="resetToHome()" class="search-button">
+    <mat-icon>home</mat-icon>
+    Show All Cars
+  </button>
+  <button mat-flat-button color="primary" class="search-button" (click)="openNewCarDialog()">
+    <mat-icon>add</mat-icon>
+    Add New Car
+  </button>
+  <button mat-flat-button color="primary" (click)="exportCars()" class="search-button">
+    <mat-icon>download</mat-icon>
+    Export to CSV
+  </button>
+
+  <!-- Add Sort Button with Menu -->
+  <button mat-flat-button color="primary" [matMenuTriggerFor]="sortMenu" class="search-button">
+    <mat-icon>sort</mat-icon>
+    Sort {{ currentSort ? (currentSort === 'asc' ? '(A-Z)' : '(Z-A)') : '' }}
+  </button>
+  <mat-menu #sortMenu="matMenu">
+    <button mat-menu-item (click)="sortCars('asc')">
+      <mat-icon>arrow_upward</mat-icon>
+      <span>Sort A-Z</span>
+    </button>
+    <button mat-menu-item (click)="sortCars('desc')">
+      <mat-icon>arrow_downward</mat-icon>
+      <span>Sort Z-A</span>
+    </button>
+    <button mat-menu-item (click)="sortCars(null)">
+      <mat-icon>clear</mat-icon>
+      <span>Clear Sorting</span>
+    </button>
+  </mat-menu>
+</div>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Filters</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div>
+      <mat-form-field appearance="outline" class="search-field mat-form-field-max-width">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="filters.name" type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="search-field mat-form-field-min-width">
+        <mat-label>Min MPG</mat-label>
+        <input matInput [(ngModel)]="filters.mpg_min" type="number" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="search-field mat-form-field-min-width">
+        <mat-label>Max MPG</mat-label>
+        <input matInput [(ngModel)]="filters.mpg_max" type="number" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="search-field mat-form-field-max-width">
+        <mat-label>Cylinders</mat-label>
+        <input matInput [(ngModel)]="filters.cylinders" type="number" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="search-field mat-form-field-min-width">
+        <mat-label>Min Displacement</mat-label>
+        <input matInput [(ngModel)]="filters.displacement_min" type="number" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="search-field mat-form-field-min-width">
+        <mat-label>Max Displacement</mat-label>
+        <input matInput [(ngModel)]="filters.displacement_max" type="number" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="search-field mat-form-field-min-width">
+        <mat-label>Min Horsepower</mat-label>
+        <input matInput [(ngModel)]="filters.horsepower_min" type="number" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="search-field mat-form-field-min-width">
+        <mat-label>Max Horsepower</mat-label>
+        <input matInput [(ngModel)]="filters.horsepower_max" type="number" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="search-field mat-form-field-min-width">
+        <mat-label>Min Weight</mat-label>
+        <input matInput [(ngModel)]="filters.weight_min" type="number" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="search-field mat-form-field-min-width">
+        <mat-label>Max Weight</mat-label>
+        <input matInput [(ngModel)]="filters.weight_max" type="number" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="search-field mat-form-field-min-width">
+        <mat-label>Min Acceleration</mat-label>
+        <input matInput [(ngModel)]="filters.acceleration_min" type="number" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="search-field mat-form-field-min-width">
+        <mat-label>Max Acceleration</mat-label>
+        <input matInput [(ngModel)]="filters.acceleration_max" type="number" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="search-field mat-form-field-max-width">
+        <mat-label>Model year</mat-label>
+        <input matInput [(ngModel)]="filters.model_year" type="number" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="search-field mat-form-field-max-width">
+        <mat-label>Origin</mat-label>
+        <input matInput [(ngModel)]="filters.origin" type="string" />
+      </mat-form-field>
+      <button mat-flat-button color="primary" class="search-button" (click)="loadCars()">
+        <mat-icon>search</mat-icon>
+        Search Cars
+      </button>
+      <button mat-flat-button color="primary" class="search-button" (click)="clearFilters()">
+        <mat-icon>clear</mat-icon>
+        Clear
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
+
 <div class="page-container">
   <!-- Left Column -->
   <div class="main-content">
-    <button mat-flat-button color="primary" (click)="resetToHome()" class="search-button">
-      <mat-icon>home</mat-icon>
-      Show All Cars
-    </button>
-    <button mat-flat-button color="primary" class="search-button" (click)="openNewCarDialog()">
-      <mat-icon>add</mat-icon>
-      Add New Car
-    </button>
-    <button mat-flat-button color="primary" (click)="exportCars()" class="search-button">
-      <mat-icon>download</mat-icon>
-      Export to CSV
-    </button>
-
-    <!-- Add Sort Button with Menu -->
-    <button mat-flat-button color="primary" [matMenuTriggerFor]="sortMenu" class="search-button">
-      <mat-icon>sort</mat-icon>
-      Sort {{ currentSort ? (currentSort === 'asc' ? '(A-Z)' : '(Z-A)') : '' }}
-    </button>
-    <mat-menu #sortMenu="matMenu">
-      <button mat-menu-item (click)="sortCars('asc')">
-        <mat-icon>arrow_upward</mat-icon>
-        <span>Sort A-Z</span>
-      </button>
-      <button mat-menu-item (click)="sortCars('desc')">
-        <mat-icon>arrow_downward</mat-icon>
-        <span>Sort Z-A</span>
-      </button>
-      <button mat-menu-item (click)="sortCars(null)">
-        <mat-icon>clear</mat-icon>
-        <span>Clear Sorting</span>
-      </button>
-    </mat-menu>
-
     <div class="car-grid">
       <mat-grid-list cols="4" rowHeight="1:1.8" gutterSize="5" class="car-grid">
         <mat-grid-tile *ngFor="let car of cars">
@@ -93,127 +168,6 @@
   <!-- Right Column -->
   <!-- Filter History Section -->
   <div class="filters-sidebar">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Filters</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div>
-          <table>
-            <tr>
-              <td>Name</td>
-              <td>
-                <mat-form-field appearance="outline" class="search-field">
-                  <mat-label>Name</mat-label>
-                  <input matInput [(ngModel)]="filters.name" type="text" />
-                </mat-form-field>
-              </td>
-            </tr>
-            <tr>
-              <td>MPG</td>
-              <td>
-                <mat-form-field appearance="outline" class="search-field">
-                  <mat-label>Min MPG</mat-label>
-                  <input matInput [(ngModel)]="filters.mpg_min" type="number" />
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="search-field">
-                  <mat-label>Max MPG</mat-label>
-                  <input matInput [(ngModel)]="filters.mpg_max" type="number" />
-                </mat-form-field>
-              </td>
-            </tr>
-            <tr>
-              <td>Cylinders</td>
-              <td>
-                <mat-form-field appearance="outline" class="search-field">
-                  <mat-label>Cylinders</mat-label>
-                  <input matInput [(ngModel)]="filters.cylinders" type="number" />
-                </mat-form-field>
-              </td>
-            </tr>
-            <tr>
-              <td>Displacement</td>
-              <td>
-                <mat-form-field appearance="outline" class="search-field">
-                  <mat-label>Min Displacement</mat-label>
-                  <input matInput [(ngModel)]="filters.displacement_min" type="number" />
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="search-field">
-                  <mat-label>Max Displacement</mat-label>
-                  <input matInput [(ngModel)]="filters.displacement_max" type="number" />
-                </mat-form-field>
-              </td>
-            </tr>
-            <tr>
-              <td>Horsepower</td>
-              <td>
-                <mat-form-field appearance="outline" class="search-field">
-                  <mat-label>Min Horsepower</mat-label>
-                  <input matInput [(ngModel)]="filters.horsepower_min" type="number" />
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="search-field">
-                  <mat-label>Max Horsepower</mat-label>
-                  <input matInput [(ngModel)]="filters.horsepower_max" type="number" />
-                </mat-form-field>
-              </td>
-            </tr>
-            <tr>
-              <td>Weight</td>
-              <td>
-                <mat-form-field appearance="outline" class="search-field">
-                  <mat-label>Min Weight</mat-label>
-                  <input matInput [(ngModel)]="filters.weight_min" type="number" />
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="search-field">
-                  <mat-label>Max Weight</mat-label>
-                  <input matInput [(ngModel)]="filters.weight_max" type="number" />
-                </mat-form-field>
-              </td>
-            </tr>
-            <tr>
-              <td>Acceleration</td>
-              <td>
-                <mat-form-field appearance="outline" class="search-field">
-                  <mat-label>Min Acceleration</mat-label>
-                  <input matInput [(ngModel)]="filters.acceleration_min" type="number" />
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="search-field">
-                  <mat-label>Max Acceleration</mat-label>
-                  <input matInput [(ngModel)]="filters.acceleration_max" type="number" />
-                </mat-form-field>
-              </td>
-            </tr>
-            <tr>
-              <td>Model Year</td>
-              <td>
-                <mat-form-field appearance="outline" class="search-field">
-                  <mat-label>Model year</mat-label>
-                  <input matInput [(ngModel)]="filters.model_year" type="number" />
-                </mat-form-field>
-              </td>
-            </tr>
-            <tr>
-              <td>Origin</td>
-              <td>
-                <mat-form-field appearance="outline" class="search-field">
-                  <mat-label>Origin</mat-label>
-                  <input matInput [(ngModel)]="filters.origin" type="string" />
-                </mat-form-field>
-              </td>
-            </tr>
-          </table>
-          <button mat-flat-button color="primary" class="search-button" (click)="loadCars()">
-            <mat-icon>search</mat-icon>
-            Search Cars
-          </button>
-          <button mat-flat-button color="primary" class="search-button" (click)="clearFilters()">
-            <mat-icon>clear</mat-icon>
-            Clear
-          </button>
-        </div>
-      </mat-card-content>
-    </mat-card>
-    <hr />
     <mat-card>
       <mat-card-header>
         <mat-card-title>Previous Filters</mat-card-title>

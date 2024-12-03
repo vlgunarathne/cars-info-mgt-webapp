@@ -20,7 +20,7 @@
 .filters-sidebar mat-card {
     /* position: sticky; */
     top: 24px;
-    max-height: calc(100vh - 350px);
+    max-height: calc(100vh - 88px);
     overflow-y: auto;
 }
 
@@ -209,4 +209,12 @@ mat-chip-listbox {
     mat-grid-list {
         cols: 1;
     }
+}
+
+.mat-form-field-min-width {
+    width: 125px;
+}
+
+.mat-form-field-max-width {
+    width: 260px;
 }
