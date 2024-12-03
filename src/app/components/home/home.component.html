@@ -14,6 +14,26 @@
       Export to CSV
     </button>
 
+    <!-- Add Sort Button with Menu -->
+    <button mat-flat-button color="primary" [matMenuTriggerFor]="sortMenu" class="search-button">
+      <mat-icon>sort</mat-icon>
+      Sort {{ currentSort ? (currentSort === 'asc' ? '(A-Z)' : '(Z-A)') : '' }}
+    </button>
+    <mat-menu #sortMenu="matMenu">
+      <button mat-menu-item (click)="sortCars('asc')">
+        <mat-icon>arrow_upward</mat-icon>
+        <span>Sort A-Z</span>
+      </button>
+      <button mat-menu-item (click)="sortCars('desc')">
+        <mat-icon>arrow_downward</mat-icon>
+        <span>Sort Z-A</span>
+      </button>
+      <button mat-menu-item (click)="sortCars(null)">
+        <mat-icon>clear</mat-icon>
+        <span>Clear Sorting</span>
+      </button>
+    </mat-menu>
+
     <div class="car-grid">
       <mat-grid-list cols="4" rowHeight="1:1.8" gutterSize="5" class="car-grid">
         <mat-grid-tile *ngFor="let car of cars">

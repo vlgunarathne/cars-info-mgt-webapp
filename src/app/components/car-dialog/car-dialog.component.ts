@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-car-dialog',
@@ -21,11 +22,12 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
     MatInputModule,
     FormsModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    CommonModule
   ]
 })
 export class CarDialogComponent {
-  isNewCar: boolean = false;
+  isNewCar: boolean = true;
   constructor(
     private dialogRef: MatDialogRef<CarDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public car: Car,

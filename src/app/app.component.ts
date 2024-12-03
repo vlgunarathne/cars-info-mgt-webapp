@@ -41,13 +41,4 @@ export class AppComponent {
     }
   }
 
-  openHelp(): void {
-    // Implement help dialog
-    console.log('Help clicked');
-  }
-
-  openAbout(): void {
-    // Implement about dialog
-    console.log('About clicked');
-  }
 }

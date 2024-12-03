@@ -16,6 +16,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-home',
@@ -32,12 +33,16 @@ import { MatButtonModule } from '@angular/material/button';
     MatChipsModule,
     MatTooltipModule,
     MatSnackBarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule,
+    CommonModule
   ],
 })
 export class HomeComponent implements OnInit {
   cars: Car[] = [];
   savedFilters: Filter[] = [];
+  currentSort: 'asc' | 'desc' | null = null;
+  private unsortedCars: Car[] = [];
 
   public filters: Filter = {
     id: null,
@@ -71,8 +76,43 @@ export class HomeComponent implements OnInit {
   }
 
   loadCars(): void {
-    this.carService.getCars(this.filters).subscribe(cars => (this.cars = cars));
+    this.carService.getCars(this.filters).subscribe({
+      next: (cars) => {
+        this.unsortedCars = [...cars]; // Store original order
+        this.cars = [...cars];
+        if (this.currentSort) {
+          this.applySorting(this.currentSort);
+        }
+      },
+      error: (error) => {
+        console.error('Error loading cars:', error);
+        this.snackBar.open('Error loading cars', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom'
+        });
+      }
+    });
     this.savedFilters.unshift(this.filters);
+  }
+
+  sortCars(direction: 'asc' | 'desc' | null) {
+    this.currentSort = direction;
+
+    if (!direction) {
+      // Reset to original order
+      this.cars = [...this.unsortedCars];
+      this.snackBar.open('Sorting cleared', 'Close', { duration: 2000 });
+      return;
+    }
+
+    this.applySorting(direction);
+
+    this.snackBar.open(
+      `Sorted ${direction === 'asc' ? 'A-Z' : 'Z-A'}`,
+      'Close',
+      { duration: 2000 }
+    );
   }
 
   loadFilters(): void {
@@ -228,6 +268,8 @@ export class HomeComponent implements OnInit {
       this.clearFilters();
     }
 
+    this.currentSort = null;
+
     // Reload all cars
     this.loadCars();
 
@@ -238,4 +280,18 @@ export class HomeComponent implements OnInit {
       verticalPosition: 'bottom'
     });
   }
+
+  private applySorting(direction: 'asc' | 'desc') {
+    this.cars.sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+
+      if (direction === 'asc') {
+        return nameA.localeCompare(nameB);
+      } else {
+        return nameB.localeCompare(nameA);
+      }
+    });
+  }
+
 }
