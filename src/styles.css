@@ -1,4 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+html, body { 
+  height: 100%; 
+  margin: 0;
+}
+
+body { 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Dark theme */
+body.dark-theme {
+  background-color: #303030;
+  color: #ffffff;
+}
+
+.dark-theme .mat-mdc-card {
+  background-color: #424242;
+  color: #ffffff;
+}
+
+.dark-theme .mat-mdc-card-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+}

@@ -37,7 +37,7 @@
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="saveCar()">{{isNewCar ? 'Create' : 'Save'}}</button>
-  <button mat-button color="warn" (click)="deleteCar()" *ngIf="!isNewCar">Delete</button>
-  <button mat-button (click)="close()">Close</button>
+  <button mat-flat-button color="primary" (click)="saveCar()">{{isNewCar ? 'Create' : 'Save'}}</button>
+  <button mat-flat-button color="warn" (click)="deleteCar()" *ngIf="!isNewCar">Delete</button>
+  <button mat-flat-button color="basic" (click)="close()">{{isNewCar ? 'Cancel' : 'Close'}}</button>
 </mat-dialog-actions>

@@ -31,8 +31,11 @@ export class CarDialogComponent {
     @Inject(MAT_DIALOG_DATA) public car: Car,
     private carService: CarService,
     private snackBar: MatSnackBar
-  ) {
-    this.isNewCar = !car.id;
+  ) { }
+
+  ngOnInit() {
+    // Check if this is a new car by verifying if the id is empty or undefined
+    this.isNewCar = !this.car?.id || this.car.id.trim() === '';
   }
 
   saveCar(): void {

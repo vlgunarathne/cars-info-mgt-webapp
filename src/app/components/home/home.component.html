@@ -1,7 +1,7 @@
 <div class="page-container">
   <!-- Left Column -->
   <div class="main-content">
-    <button mat-flat-button color="basic" (click)="resetToHome()" class="search-button">
+    <button mat-flat-button color="primary" (click)="resetToHome()" class="search-button">
       <mat-icon>home</mat-icon>
       Show All Cars
     </button>
@@ -15,9 +15,12 @@
     </button>
 
     <div class="car-grid">
-      <mat-grid-list cols="4" rowHeight="1:1" gutterSize="5" class="car-grid">
+      <mat-grid-list cols="4" rowHeight="1:1.8" gutterSize="5" class="car-grid">
         <mat-grid-tile *ngFor="let car of cars">
           <mat-card class="car-card" (click)="openCarDialog(car)">
+            <div class="car-image-container">
+              <img src="/car_thumbnail.jpeg" [alt]="car.name" class="car-thumbnail" width="20px" height="20px">
+            </div>
             <mat-card-header>
               <mat-card-title>{{ car.name }}</mat-card-title>
               <mat-card-subtitle>Year : {{ car.model_year }}</mat-card-subtitle>
