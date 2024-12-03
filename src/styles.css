@@ -10,6 +10,8 @@ body {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -36,4 +38,16 @@ body.dark-theme {
 .car-dialog .mat-mdc-dialog-surface {
     border-radius: 8px;
     overflow: hidden;
+}
+
+.main-content {
+    flex: 1;
+    padding-bottom: 60px;
+    /* Space for the footer */
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
