@@ -15,6 +15,7 @@ import { FilterService } from '../../services/filter.service';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +31,8 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
     MatIconModule,
     MatChipsModule,
     MatTooltipModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatButtonModule
   ],
 })
 export class HomeComponent implements OnInit {
@@ -94,7 +96,6 @@ export class HomeComponent implements OnInit {
       acceleration_max: null,
       model_year: null,
       origin: null
-      // Add other filters here
     };
   }
 
@@ -181,6 +182,60 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) this.loadCars();
+    });
+  }
+
+  openNewCarDialog(): void {
+    const newCar: Car = {
+      id: '',
+      name: '',
+      mpg: 0,
+      cylinders: 0,
+      displacement: 0,
+      horsepower: 0,
+      weight: 0,
+      acceleration: 0,
+      model_year: 0,
+      origin: ''
+    };
+
+    const dialogRef = this.dialog.open(CarDialogComponent, {
+      width: '600px',
+      data: newCar,
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) this.loadCars();
+    });
+  }
+
+  exportCars(): void {
+    if (this.cars && this.cars.length > 0) {
+      this.carService.exportToCsv(this.cars);
+    } else {
+      this.snackBar.open('No cars available to export', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom'
+      });
+    }
+  }
+
+  resetToHome(): void {
+    // Reset any filter/search states you might have
+    if (this.filters) {
+      this.clearFilters();
+    }
+
+    // Reload all cars
+    this.loadCars();
+
+    // Show confirmation to user
+    this.snackBar.open('Showing all cars', 'Close', {
+      duration: 2000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
     });
   }
 }

@@ -10,7 +10,7 @@ import { carServiceApiUrl } from '../app.config';
 export class CarService {
   private apiUrl = `${carServiceApiUrl}/cars`; // Replace with your API URL
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getCars(filters?: any): Observable<Car[]> {
     let params = new HttpParams();
@@ -39,4 +39,43 @@ export class CarService {
   deleteCar(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  exportToCsv(cars: Car[]): void {
+    // Define CSV headers
+    const headers = ['Name', 'MPG', 'Cylinders', 'Displacement', 'Horsepower',
+      'Weight', 'Acceleration', 'Model Year', 'Origin'];
+
+    // Convert cars data to CSV rows
+    const csvData = cars.map(car => [
+      car.name,
+      car.mpg,
+      car.cylinders,
+      car.displacement,
+      car.horsepower,
+      car.weight,
+      car.acceleration,
+      car.model_year,
+      car.origin
+    ]);
+
+    // Combine headers and data
+    const csvContent = [
+      headers.join(','),
+      ...csvData.map(row => row.join(','))
+    ].join('\n');
+
+    // Create and trigger download
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'cars_export.csv');
+    link.style.visibility = 'hidden';
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
 }

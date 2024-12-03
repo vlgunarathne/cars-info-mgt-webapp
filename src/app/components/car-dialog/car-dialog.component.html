@@ -33,11 +33,11 @@
   </mat-form-field>
   <mat-form-field appearance="fill" class="formField">
     <mat-label>Origin</mat-label>
-    <input matInput [(ngModel)]="car.origin" type="number" />
+    <input matInput [(ngModel)]="car.origin" type="string" />
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="saveCar()">Save</button>
-  <button mat-button color="warn" (click)="deleteCar()">Delete</button>
+  <button mat-button (click)="saveCar()">{{isNewCar ? 'Create' : 'Save'}}</button>
+  <button mat-button color="warn" (click)="deleteCar()" *ngIf="!isNewCar">Delete</button>
   <button mat-button (click)="close()">Close</button>
 </mat-dialog-actions>

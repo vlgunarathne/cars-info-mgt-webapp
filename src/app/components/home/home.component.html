@@ -1,7 +1,18 @@
 <div class="page-container">
   <!-- Left Column -->
   <div class="main-content">
-    <!-- Add similar fields for other filters -->
+    <button mat-flat-button color="basic" (click)="resetToHome()" class="search-button">
+      <mat-icon>home</mat-icon>
+      Show All Cars
+    </button>
+    <button mat-flat-button color="primary" class="search-button" (click)="openNewCarDialog()">
+      <mat-icon>add</mat-icon>
+      Add New Car
+    </button>
+    <button mat-flat-button color="primary" (click)="exportCars()" class="search-button">
+      <mat-icon>download</mat-icon>
+      Export to CSV
+    </button>
 
     <div class="car-grid">
       <mat-grid-list cols="4" rowHeight="1:1" gutterSize="5" class="car-grid">
@@ -59,25 +70,6 @@
   <!-- Right Column -->
   <!-- Filter History Section -->
   <div class="filters-sidebar">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Previous Filters</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <mat-chip-listbox class="filter-list">
-          <mat-chip-option *ngFor="let filter of savedFilters; let i = index" (click)="applyHistoricalFilter(filter)"
-            [matTooltip]="getFilterDisplayText(filter)" matTooltipPosition="above" class="filter-chip">
-            Date : {{filter.createdAt}}
-            {{ getFilterDisplayText(filter) }}
-            <button matChipRemove (click)="deleteFilter($event, filter, i)" [matTooltip]="'Delete filter'"
-              class="delete-button">
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip-option>
-        </mat-chip-listbox>
-      </mat-card-content>
-    </mat-card>
-    <hr />
     <mat-card>
       <mat-card-header>
         <mat-card-title>Filters</mat-card-title>
@@ -196,6 +188,25 @@
             Clear
           </button>
         </div>
+      </mat-card-content>
+    </mat-card>
+    <hr />
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Previous Filters</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-chip-listbox class="filter-list">
+          <mat-chip-option *ngFor="let filter of savedFilters; let i = index" (click)="applyHistoricalFilter(filter)"
+            [matTooltip]="getFilterDisplayText(filter)" matTooltipPosition="above" class="filter-chip">
+            Date : {{filter.createdAt}}
+            {{ getFilterDisplayText(filter) }}
+            <button matChipRemove (click)="deleteFilter($event, filter, i)" [matTooltip]="'Delete filter'"
+              class="delete-button">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-option>
+        </mat-chip-listbox>
       </mat-card-content>
     </mat-card>
   </div>
